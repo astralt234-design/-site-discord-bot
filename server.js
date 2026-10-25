@@ -15,7 +15,7 @@ app.use("/api/", rateLimit({
 }));
 
 app.post("/api/message", async (req, res) => {
-  const { code, message } = req.body || {};
+  const { message } = req.body || {};
 
 
   if (typeof message !== "string" ||
