@@ -17,12 +17,6 @@ app.use("/api/", rateLimit({
 app.post("/api/message", async (req, res) => {
   const { code, message } = req.body || {};
 
-  if (!process.env.SITE_ACCESS_CODE ||
-      code !== process.env.SITE_ACCESS_CODE) {
-    return res.status(401).json({
-      error: "Code d'accès incorrect."
-    });
-  }
 
   if (typeof message !== "string" ||
       !message.trim() ||
