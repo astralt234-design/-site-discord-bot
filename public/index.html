@@ -4,461 +4,320 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
-<title>Snap+ — Démonstration</title>
+<title>Tech Privée</title>
 
 <style>
-* { box-sizing: border-box; }
-
 :root {
   --yellow: #fffc00;
   --bg: #080808;
-  --panel: #141414;
-  --muted: #a4a4a4;
+  --panel: #151515;
+  --muted: #a5a5a5;
 }
+
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at 50% 0%, #333000 0%, transparent 48%),
+    radial-gradient(ellipse at top, #333000 0%, transparent 48%),
     var(--bg);
   color: white;
   font-family: -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  display: flex;
-  justify-content: center;
 }
 
-button, input { font: inherit; }
+button, textarea { font: inherit; }
 
 .app {
   width: 100%;
-  max-width: 440px;
-  min-height: 100dvh;
-  padding: 26px 23px;
+  max-width: 460px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 25px 22px;
   display: flex;
   flex-direction: column;
 }
 
-.top {
+header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 42px;
+  margin-bottom: 55px;
 }
 
 .logo {
-  width: 58px;
-  height: 58px;
-  border-radius: 19px;
+  width: 55px;
+  height: 55px;
   display: grid;
   place-items: center;
+  border-radius: 18px;
   background: var(--yellow);
-  color: black;
-  font-size: 35px;
-  box-shadow: 0 0 35px #fffc0040;
+  color: #080808;
+  font-size: 27px;
+  font-weight: 900;
+  box-shadow: 0 0 35px #fffc0030;
 }
 
 .tag {
   color: var(--yellow);
   border: 1px solid #fffc0050;
-  padding: 7px 11px;
   border-radius: 30px;
-  font-size: 11px;
-}
-
-.progress {
-  display: flex;
-  gap: 8px;
-  margin: 0 auto 36px;
-  width: 65%;
-}
-
-.dot {
-  flex: 1;
-  height: 4px;
-  border-radius: 10px;
-  background: #343434;
-  transition: background .3s;
-}
-
-.dot.active { background: var(--yellow); }
-
-.screen {
-  display: none;
-  animation: appear .4s ease both;
-}
-
-.screen.active { display: block; }
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  padding: 8px 12px;
+  font-size: 10px;
+  letter-spacing: 1px;
 }
 
 h1 {
-  font-size: clamp(32px, 9vw, 43px);
-  line-height: 1.08;
-  letter-spacing: -1.5px;
-  margin: 23px 0 17px;
+  font-size: clamp(36px, 10vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -1.8px;
+  margin: 0 0 18px;
 }
 
 .yellow { color: var(--yellow); }
 
-p {
-  color: #c0c0c0;
-  line-height: 1.65;
+.subtitle {
+  color: #aaa;
+  line-height: 1.7;
   font-size: 15px;
+  margin-bottom: 30px;
 }
 
-.features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 30px 0;
-}
-
-.feature {
-  background: #ffffff08;
+.card {
+  padding: 21px;
+  background: #151515dd;
   border: 1px solid #ffffff12;
-  border-radius: 15px;
-  padding: 15px 5px;
-  text-align: center;
-  font-size: 12px;
-  color: #ddd;
+  border-radius: 23px;
+  box-shadow: 0 20px 70px #0008;
 }
 
-.feature span {
+.label {
   display: block;
-  font-size: 23px;
-  margin-bottom: 8px;
-}
-
-.btn {
-  width: 100%;
-  min-height: 55px;
-  border: 0;
-  border-radius: 17px;
-  background: var(--yellow);
-  color: black;
-  font-weight: 800;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform .15s, filter .15s;
-}
-
-.btn:active { transform: scale(.97); }
-.btn:hover { filter: brightness(.94); }
-
-.secondary {
-  background: transparent;
-  color: white;
-  border: 1px solid #383838;
-  margin-top: 12px;
-}
-
-.field-label {
-  display: block;
-  margin: 25px 0 10px;
   font-size: 13px;
   color: #ddd;
+  margin-bottom: 12px;
 }
 
-.input {
+textarea {
+  display: block;
   width: 100%;
-  min-height: 57px;
-  border: 1px solid #414141;
-  border-radius: 16px;
-  background: #111;
-  color: white;
-  padding: 0 16px;
-  outline: none;
-}
-
-.input:focus {
-  border-color: var(--yellow);
-  box-shadow: 0 0 0 3px #fffc001a;
-}
-
-.hint {
-  font-size: 12px;
-  color: var(--muted);
-  margin: 12px 0 24px;
-}
-
-.notice {
-  background: #ffffff08;
-  border: 1px solid #ffffff12;
+  min-height: 155px;
+  padding: 16px;
   border-radius: 15px;
-  padding: 14px;
-  color: #bdbdbd;
-  font-size: 12px;
+  border: 1px solid #393939;
+  outline: none;
+  resize: vertical;
+  background: #0c0c0c;
+  color: white;
   line-height: 1.6;
-  margin: 18px 0 24px;
+}
+
+textarea:focus {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px #fffc0018;
+}
+
+textarea::placeholder { color: #686868; }
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  color: #858585;
+  font-size: 11px;
+  margin: 10px 0 19px;
+}
+
+button {
+  width: 100%;
+  min-height: 55px;
+  padding: 14px;
+  border: none;
+  border-radius: 16px;
+  background: var(--yellow);
+  color: #080808;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s, opacity .2s;
+}
+
+button:active { transform: scale(.98); }
+
+button:disabled {
+  opacity: .55;
+  cursor: wait;
 }
 
 .status {
-  text-align: center;
-  padding-top: 12px;
+  display: none;
+  padding: 13px;
+  margin-top: 16px;
+  border-radius: 13px;
+  background: #ffffff08;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
-.spinner {
-  width: 104px;
-  height: 104px;
-  border: 5px solid #383800;
-  border-top-color: var(--yellow);
-  border-right-color: var(--yellow);
-  border-radius: 50%;
-  margin: 30px auto;
-  animation: spin 1s linear infinite;
-  display: grid;
-  place-items: center;
-  font-size: 40px;
+.status.show { display: block; }
+
+.status.success { color: #a6f0b4; }
+.status.error { color: #ffaaaa; }
+
+.info {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid #ffffff10;
+  border-radius: 17px;
+  background: #ffffff06;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+.info-icon { font-size: 21px; }
 
-.code-input {
-  text-align: center;
-  font-size: 27px;
-  letter-spacing: 12px;
-  padding-left: 26px;
+.info p {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0;
 }
 
-.result-icon {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 25px auto;
-  background: #fffc0015;
-  border: 2px solid var(--yellow);
-  display: grid;
-  place-items: center;
-  color: var(--yellow);
-  font-size: 55px;
-  box-shadow: 0 0 45px #fffc001c;
-}
-
-.footer {
+footer {
   margin-top: auto;
-  padding-top: 35px;
+  padding-top: 45px;
   text-align: center;
   font-size: 11px;
-  color: #777;
+  color: #696969;
   line-height: 1.8;
 }
 
-.error {
-  color: #ff9999;
-  font-size: 13px;
-  margin: 12px 0;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
+  *, *::before, *::after { transition: none; }
 }
 </style>
 </head>
 
 <body>
 <main class="app">
-  <header class="top">
-    <div class="logo" aria-label="Logo de démonstration">👻</div>
-    <div class="tag">DÉMONSTRATION FICTIVE</div>
+
+  <header>
+    <div class="logo">TP</div>
+    <div class="tag">ESPACE PRIVÉ</div>
   </header>
 
-  <div class="progress" id="progress" aria-label="Étapes">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
+  <section>
+    <h1>Un message.<br><span class="yellow">Directement.</span></h1>
+    <p class="subtitle">
+      Un espace simple pour envoyer un message à notre salon Discord.
+      Écris ton texte, puis envoie-le en un clic.
+    </p>
+  </section>
+
+  <section class="card">
+    <label class="label" for="message">
+      Ton message
+    </label>
+
+    <textarea
+      id="message"
+      maxlength="1500"
+      placeholder="Écris ton message ici..."
+      aria-describedby="counter"
+    ></textarea>
+
+    <div class="meta">
+      <span>Maximum 1 500 caractères</span>
+      <span id="counter">0 / 1500</span>
+    </div>
+
+    <button id="sendButton" type="button">
+      Envoyer sur Discord →
+    </button>
+
+    <div id="status" class="status" role="status"
+         aria-live="polite"></div>
+  </section>
+
+  <div class="info">
+    <div class="info-icon">🔒</div>
+    <p>
+      <strong style="color:white">Envoi sécurisé</strong><br>
+      Le webhook Discord reste sur le serveur. Ne partage jamais
+      son URL publiquement. Évite d'envoyer des informations sensibles.
+    </p>
   </div>
 
-  <section class="screen active" id="welcome">
-    <div style="text-align:center">
-      <h1>Snap+ <span class="yellow">GRATUIT</span></h1>
-      <p>Découvre une maquette interactive inspirée des interfaces premium.</p>
-    </div>
-
-    <div class="features">
-      <div class="feature"><span>👑</span>Badges</div>
-      <div class="feature"><span>✨</span>Effets</div>
-      <div class="feature"><span>🌟</span>Style premium</div>
-    </div>
-
-    <div class="notice">
-      ℹ️ Projet non officiel : cette page ne fournit aucun abonnement
-      Snapchat+ et n'est affiliée à Snapchat d'aucune manière.
-    </div>
-
-    <button class="btn" onclick="go('phone')">
-      Découvrir la démo →
-    </button>
-  </section>
-
-  <section class="screen" id="phone">
-    <h1>Entre un numéro de <span class="yellow">téléphone</span></h1>
-    <p>Cette étape vérifie uniquement le format d'un numéro français.</p>
-
-    <label class="field-label" for="phoneInput">
-      Numéro de téléphone fictif ou de test
-    </label>
-    <input class="input" id="phoneInput" type="tel"
-      inputmode="numeric" autocomplete="off"
-      maxlength="14" placeholder="06 12 34 56 78">
-
-    <p class="hint">Format attendu : 10 chiffres, commençant par 06 ou 07.</p>
-    <div id="phoneError" class="error" role="alert"></div>
-
-    <button class="btn" onclick="checkPhone()">Continuer →</button>
-    <button class="btn secondary" onclick="go('welcome')">Retour</button>
-
-    <div class="notice">
-      🔒 Le numéro reste dans cette page : il n'est pas envoyé à un serveur.
-    </div>
-  </section>
-
-  <section class="screen" id="checking">
-    <div class="status">
-      <div class="spinner">👻</div>
-      <h1>Vérification <span class="yellow">en cours…</span></h1>
-      <p id="checkingText">Vérification du format du numéro…</p>
-    </div>
-  </section>
-
-  <section class="screen" id="demoCode">
-    <h1>Code de <span class="yellow">démonstration</span></h1>
-    <p>Aucun SMS n'est envoyé. Pour tester l'étape suivante, utilise le code fictif affiché ici.</p>
-
-    <div class="notice">
-      🧪 Code de test de cette maquette : <strong style="color:#fffc00">1234</strong>
-      <br>Ce code ne vérifie aucun compte et n'est envoyé nulle part.
-    </div>
-
-    <label class="field-label" for="codeInput">Code de test à 4 chiffres</label>
-    <input class="input code-input" id="codeInput"
-      inputmode="numeric" autocomplete="off"
-      maxlength="4" placeholder="••••">
-
-    <div id="codeError" class="error" role="alert"></div>
-
-    <button class="btn" onclick="checkCode()">Tester le code →</button>
-    <button class="btn secondary" onclick="go('phone')">Retour</button>
-  </section>
-
-  <section class="screen" id="processing">
-    <div class="status">
-      <div class="spinner">✨</div>
-      <h1>Simulation <span class="yellow">en cours…</span></h1>
-      <p>Préparation de l'écran final de démonstration.</p>
-      <p class="hint">Aucun abonnement n'est commandé ou envoyé.</p>
-    </div>
-  </section>
-
-  <section class="screen" id="finished">
-    <div class="status">
-      <div class="result-icon">✓</div>
-      <h1>Démo <span class="yellow">terminée !</span></h1>
-      <p>Tu as terminé le parcours de test avec succès.</p>
-
-      <div class="notice">
-        ✅ Parcours de démonstration terminé.
-        <br>❗ Aucun compte n'a été vérifié et aucun abonnement Snapchat+
-        n'a été envoyé.
-      </div>
-
-      <button class="btn" onclick="restart()">Recommencer ↻</button>
-    </div>
-  </section>
-
-  <footer class="footer">
-    Maquette indépendante • Aucune donnée transmise<br>
-    Non affilié à Snapchat
+  <footer>
+    TECH PRIVÉE<br>
+    Espace de messagerie indépendant
   </footer>
+
 </main>
 
 <script>
-const screens = [
-  "welcome", "phone", "checking",
-  "demoCode", "processing", "finished"
-];
+const messageInput = document.getElementById("message");
+const counter = document.getElementById("counter");
+const sendButton = document.getElementById("sendButton");
+const statusBox = document.getElementById("status");
 
-function go(id) {
-  screens.forEach(name => {
-    document.getElementById(name).classList.toggle("active", name === id);
-  });
+messageInput.addEventListener("input", () => {
+  counter.textContent = messageInput.value.length + " / 1500";
+});
 
-  const step = {
-    welcome: 0,
-    phone: 0,
-    checking: 1,
-    demoCode: 1,
-    processing: 2,
-    finished: 2
-  }[id];
-
-  document.querySelectorAll(".dot").forEach((dot, i) => {
-    dot.classList.toggle("active", i <= step);
-  });
+function showStatus(message, type) {
+  statusBox.textContent = message;
+  statusBox.className = "status show " + type;
 }
 
-function checkPhone() {
-  const input = document.getElementById("phoneInput");
-  const error = document.getElementById("phoneError");
-  const digits = input.value.replace(/\D/g, "");
+sendButton.addEventListener("click", async () => {
+  const message = messageInput.value.trim();
 
-  if (!/^0[67]\d{8}$/.test(digits)) {
-    error.textContent =
-      "Format incorrect : entre 10 chiffres commençant par 06 ou 07.";
+  if (!message) {
+    showStatus("Écris un message avant de l'envoyer.", "error");
     return;
   }
 
-  error.textContent = "";
-  go("checking");
-
-  setTimeout(() => {
-    document.getElementById("checkingText").textContent =
-      "Format valide. Passage à l'étape de test…";
-    setTimeout(() => go("demoCode"), 900);
-  }, 1400);
-}
-
-document.getElementById("phoneInput").addEventListener("input", e => {
-  let digits = e.target.value.replace(/\D/g, "").slice(0, 10);
-  e.target.value = digits.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
-  document.getElementById("phoneError").textContent = "";
-});
-
-document.getElementById("codeInput").addEventListener("input", e => {
-  e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4);
-  document.getElementById("codeError").textContent = "";
-});
-
-function checkCode() {
-  const code = document.getElementById("codeInput").value;
-  const error = document.getElementById("codeError");
-
-  if (code !== "1234") {
-    error.textContent = "Code de test incorrect. Essaie 1234.";
+  if (message.length > 1500) {
+    showStatus("Ton message est trop long.", "error");
     return;
   }
 
-  error.textContent = "";
-  go("processing");
-  setTimeout(() => go("finished"), 1800);
-}
+  sendButton.disabled = true;
+  sendButton.textContent = "Envoi en cours…";
+  showStatus("Connexion au serveur…", "");
 
-function restart() {
-  document.getElementById("phoneInput").value = "";
-  document.getElementById("codeInput").value = "";
-  document.getElementById("phoneError").textContent = "";
-  document.getElementById("codeError").textContent = "";
-  document.getElementById("checkingText").textContent =
-    "Vérification du format du numéro…";
-  go("welcome");
-}
+  try {
+    const response = await fetch("/api/message", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "L'envoi a échoué.");
+    }
+
+    showStatus("✅ Ton message a bien été envoyé sur Discord !", "success");
+    messageInput.value = "";
+    counter.textContent = "0 / 1500";
+
+  } catch (error) {
+    showStatus(
+      "❌ Impossible d'envoyer le message. " +
+      (error.message || "Vérifie que le serveur Render fonctionne."),
+      "error"
+    );
+  } finally {
+    sendButton.disabled = false;
+    sendButton.textContent = "Envoyer sur Discord →";
+  }
+});
 </script>
+
 </body>
 </html>
