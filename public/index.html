@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b10">
+  <title>Mon espace privé</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: #0b0b10;
+      color: #f7f7fb;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    main {
+      width: 100%;
+      max-width: 430px;
+      padding: 28px;
+      border: 1px solid #292936;
+      border-radius: 24px;
+      background: #14141d;
+      box-shadow: 0 20px 60px #0006;
+    }
+    h1 { margin-top: 0; font-size: 27px; }
+    p { color: #aaaabc; line-height: 1.5; }
+    label { display: block; margin: 18px 0 8px; }
+    input, textarea, button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      font: inherit;
+    }
+    input, textarea {
+      color: white;
+      background: #0b0b10;
+      border: 1px solid #383849;
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    button {
+      margin-top: 18px;
+      border: 0;
+      color: white;
+      background: #6c5ce7;
+      font-weight: 700;
+    }
+    button:disabled { opacity: .6; }
+    #status { min-height: 24px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Mon espace privé ✨</h1>
+    <p>Connecte-toi avec ton code d'accès, puis envoie ton message.</p>
+
+    <form id="messageForm">
+      <label for="accessCode">Code d'accès</label>
+      <input id="accessCode" type="password"
+        autocomplete="current-password" required>
+
+      <label for="message">Ton message</label>
+      <textarea id="message" maxlength="1500"
+        placeholder="Écris ton message..." required></textarea>
+
+      <button id="sendButton" type="submit">Envoyer le message</button>
+      <p id="status" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById("messageForm");
+    const button = document.getElementById("sendButton");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      button.disabled = true;
+      status.textContent = "Envoi en cours…";
+
+      try {
+        const response = await fetch("/api/message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            code: document.getElementById("accessCode").value,
+            message: document.getElementById("message").value
+          })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Échec de l'envoi.");
+
+        status.textContent = "Message envoyé avec succès ! ✅";
+        document.getElementById("message").value = "";
+      } catch (error) {
+        status.textContent = error.message || "Erreur de connexion.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
